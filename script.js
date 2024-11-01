@@ -17,5 +17,4 @@ do {
         3 - sair
         `)
 
-
-    }
+alert('obrigado por se increver!')
