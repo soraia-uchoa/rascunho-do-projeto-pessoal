@@ -18,3 +18,8 @@ do {
         `)
 
 alert('obrigado por se increver!'):
+    // outro
+    function welcome() {
+    console.log('bem-vindo a Uchôafit!')
+}
+function newUser()
