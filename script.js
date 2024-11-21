@@ -1,4 +1,10 @@
+
+const workouts = []
+const user = {}
+
 // Função para cumprimentar o usuário com base no período
+
+
 function greetUserBasedOnPeriod(user) {
     const { name, period } = user; // Desestruturação do objeto
 
@@ -32,32 +38,40 @@ function checkWeight(weight) {
 
 // Função para registrar os treinos
 function performWorkouts() {
-    let workouts = [];  // Array para armazenar os treinos realizados
-    let sessions = 0;
-
-    while (sessions < 3) {
-        workouts.push('Treino número ' + (sessions + 1) + ' realizado!'); // Adiciona cada treino ao array
-        sessions++;
-    }
-
-    return workouts;  // Retorna o array com os treinos realizados
+    workouts.push(user.period)
 }
 
-// Função para perguntar ao usuário se ele quer continuar treinando
-function askForMoreTraining() {
-    let continueTraining;
-    do {
-        continueTraining = prompt('Deseja realizar mais um treino? (sim/não)');
-    } while (continueTraining.toLowerCase() === 'sim');
-    return continueTraining;
+function newUser() {
+    user.name = prompt('Qual é o seu nome?')
+    user.period = prompt('Qual período você deseja (manhã/tarde/noite)?')
+    user.weight = parseFloat(prompt('Qual é o seu peso?'))
+    user.height = parseFloat(prompt('Qual é a sua altura?'))
 }
 
 // Função para mostrar o resumo do treino
-function showWorkoutSummary(workouts) {
-    alert('Resumo do seu treino:');
-    workouts.forEach((workout, index) => {
-        alert(workout);  // Exibe cada treino do array
-    });
+function showWorkoutSummary() {
+    alert('Treinos realizados!');
+}
+
+function askForMoreTraining() {
+    let continueTraining;
+    do {
+        continueTraining = confirm('Deseja realizar mais um treino?');
+
+        switch (continueTraining) {
+            case true:
+
+                newUser()
+                greetUserBasedOnPeriod(user);
+                checkWeight(user.weight);
+                break
+            case false:
+                alert('Obrigado por participar!')
+                break
+        }
+        
+    } while (continueTraining !== false);
+    return continueTraining;
 }
 
 // Função principal para organizar o fluxo de execução
@@ -65,27 +79,21 @@ function main() {
     alert('Bem-vindo à UchoaFit!');
     
     // Objeto para armazenar as informações do usuário
-    const user = {
-        name: prompt('Qual é o seu nome?'),
-        period: prompt('Qual período você deseja (manhã/tarde/noite)?'),
-        weight: parseFloat(prompt('Qual é o seu peso?')),
-        height: parseFloat(prompt('Qual é a sua altura?'))
-    };
+    newUser()
 
     // Chama as funções
     greetUserBasedOnPeriod(user);
     checkWeight(user.weight);
     
     // Realiza os treinos e armazena no array
-    let workouts = performWorkouts();
+    performWorkouts();
     
     // Pergunta se o usuário quer continuar treinando
     askForMoreTraining();
 
     // Mostra o resumo dos treinos realizados
     showWorkoutSummary(workouts);
-    
-    alert('Obrigado por participar, ' + user.name + '!');
+
 }
 
 // Chama a função principal para executar o código
